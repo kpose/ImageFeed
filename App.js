@@ -3,20 +3,20 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 
 //import Avatar from './components/Avatar';
-import AutoRow from './components/AutoRow';
+import Card from './components/Card';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style = {styles.container}>
-      <AutoRow
-        fullname = {'Ganihu Jude'}
-        linkText = {'40 Comments'}
-        onPressLinkText = {() => {
-            console.log('Pressed Link');
+      <Card  
+        fullname={'Ganihu Jude'}
+        linkText={'39 comments'}
+        onPressLinkText={() => {
+          console.log('Pressed link!');
         }}
+        image={{ uri: 'http://unsplash.it/600/600'}}
         />
-
       </View>
     );
   }
