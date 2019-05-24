@@ -1,4 +1,4 @@
-import { Image, StyleSheet,  View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react'
 
@@ -7,6 +7,15 @@ import AutoRow from './AutoRow';
 
 
 export default class Card extends React.Component {
+
+    state = {
+        loading: true,
+    };
+
+    handleLoad = () => {
+        this.setState({ loading: false});
+    };
+
     static propTypes = {
         fullname: PropTypes.string.isRequired,
         image: Image.propTypes.source.isRequired,
@@ -20,7 +29,8 @@ export default class Card extends React.Component {
         };
 
         render() {
-            const { fullname, image, linkText, onPressLinkText } = this.props;
+            const { fullname, image, linkText, onPressLinkText,} = this.props;
+            const { loading } = this.state;
 
             return (
                 <View>
@@ -29,8 +39,18 @@ export default class Card extends React.Component {
                         linkText= {linkText}
                         onPressLinkText = {onPressLinkText} />
 
-
-                        <Image style= {styles.image} source={image} />
+                        <View style = {styles.image}>
+                            {loading &&  (
+                                <ActivityIndicator style={StyleSheet.absoluteFill} size={'large'} />
+                                
+                            )}      
+                                                                
+                        <Image 
+                            style= {styles.absoluteFill} 
+                            source={image}  
+                            onload = {this.handleLoad}
+                        />
+                    </View>
                 </View>
             )
         }
