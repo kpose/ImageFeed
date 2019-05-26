@@ -20,31 +20,31 @@ export default class CardList extends React.Component {
     onPressComments: PropTypes.func.isRequired,
   };
 
-  renderItem = ({ item: { id, author } }) => (
+  renderItem = ({ item: { id, author } }) => {
     const { commentsForItem, onPressComments } = this.props;
     const comments = commentsForItem[id];
-  
-  return (
+
+    return (
       <Card
         fullname={author}
         image={{
           uri: getImageFromId(id),
-      }}
-      linkText={`${comments ? comments.length : 0} Comments`}
-      onPressLinkText={() => onPressComments(id)}
-    />
+        }}
+        linkText={`${comments ? comments.length : 0} Comments`}
+        onPressLinkText={() => onPressComments(id)}
+      />
+    );
+  };
 
   render() {
     const { items, commentsForItem } = this.props;
 
-
     return (
       <FlatList
         data={items}
+        extraData={commentsForItem}
         renderItem={this.renderItem}
         keyExtractor={keyExtractor}
-        extraData={commentsForItem}
-
       />
     );
   }
